@@ -6,7 +6,7 @@ function doPost(e) {
         //JSONをコンソール出力
         console.log(data);
         // Discordに送信
-        sendDiscord(Message.replace("%note_id%", data.body.id));
+        sendDiscord(Message.replace("%note_id%", data.body.note.id));
         //レスポンス
         return result(true);
 
