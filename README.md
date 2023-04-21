@@ -1,0 +1,2 @@
+# NoteHook
+ Misskeyでノートを作ると自動でDiscordの指定したチャンネルにノートを表示するGoogle Apps Script
