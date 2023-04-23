@@ -6,11 +6,19 @@ function doPost(e) {
         //JSONをコンソール出力
         console.log(data);
 
-        // Discordに送信
-        sendDiscord(data.body.note);
-        //レスポンス
-        return result(true);
+        if (Visibility.includes(data.body.note.visibility)) {
 
+            // Discordに送信
+            sendDiscord(data.body.note);
+            //レスポンス
+            return result(true);
+
+        } else {
+
+            //レスポンス
+            return result(false);
+
+        }
     } catch (err) {
         //エラーの場合の処理
 
