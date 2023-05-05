@@ -9,18 +9,7 @@ function result(status) {
 function sendDiscord(note) {
 
     const payload = {
-        "content": Message.replace("%note_id%", note.id).replace("%Instance%", Instance),
-        "embeds": [
-            {
-                "title": `${note.user.name} (@${note.user.username})`,
-                "description": note.text,
-                "url": `https://${Instance}/notes/${note.id}`,
-                "color": Color,
-                "thumbnail": {
-                    "url": note.user.avatarUrl
-                }
-            }
-        ]
+        "content": Message.replace("%note_id%", note.id).replace("%Instance%", Instance)
     };
 
     UrlFetchApp.fetch(Discord_Webhook, {
