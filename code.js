@@ -36,7 +36,7 @@ function run() {
     const properties = PropertiesService.getScriptProperties();
 
     // 一番上にあるプロジェクトプロパティを取得
-    const id = properties.getKeys()[0];
+    const id = properties.getKeys().slice(-1)[0];
     const text = properties.getProperty(id);
     // プロジェクトプロパティ削除
     properties.deleteProperty(id);
