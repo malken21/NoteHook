@@ -6,10 +6,10 @@ function result(status) {
 }
 
 // DiscordのWebhookを使って Discordにメッセージを送信する
-function sendDiscord(note) {
+function sendDiscord(text) {
 
     const payload = {
-        "content": Message.replace("%note_id%", note.id).replace("%Instance%", Instance)
+        "content": text
     };
 
     UrlFetchApp.fetch(Discord_Webhook, {
@@ -17,4 +17,17 @@ function sendDiscord(note) {
         contentType: "application/json",
         payload: JSON.stringify(payload),
     });
+}
+
+// トリガー作成
+function createTrigger(note) {
+    // 1分後に run が実行するように設定
+    const trigger = ScriptApp.newTrigger("run").timeBased().after(60000).create();
+
+    // プロジェクトプロパティ生成
+    PropertiesService.getScriptProperties().setProperty(
+        trigger.getUniqueId(),
+        // Discordに送信する文字
+        Message.replace("%note_id%", note.id).replace("%Instance%", Instance)
+    );
 }

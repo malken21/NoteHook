@@ -1,3 +1,4 @@
+// Misskeyからのリクエストで実行
 function doPost(e) {
     try {
 
@@ -8,8 +9,8 @@ function doPost(e) {
 
         if (Visibility.includes(data.body.note.visibility)) {
 
-            // Discordに送信
-            sendDiscord(data.body.note);
+            // トリガー作成
+            createTrigger(data.body.note);
             //レスポンス
             return result(true);
 
@@ -27,4 +28,27 @@ function doPost(e) {
         //レスポンス
         return result(false);
     }
+}
+
+// トリガーから実行
+function run() {
+    // プロジェクトプロパティ取得
+    const properties = PropertiesService.getScriptProperties();
+
+    // 一番上にあるプロジェクトプロパティを取得
+    const id = properties.getKeys()[0];
+    const text = properties.getProperty(id);
+    // プロジェクトプロパティ削除
+    properties.deleteProperty(id);
+
+    // Discordに送信
+    sendDiscord(text);
+    // Discordに送信する文字をログ出力
+    console.log(text);
+
+    // トリガーを削除
+    ScriptApp.getProjectTriggers().forEach(trigger => {
+        if (trigger.getUniqueId() == id)
+            ScriptApp.deleteTrigger(trigger);
+    });
 }

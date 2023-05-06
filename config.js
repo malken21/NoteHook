@@ -4,7 +4,7 @@ const Discord_Webhook = "Discord Webhook URL";
 // Misskeyインスタンスのドメイン
 const Instance = "misskey.io";
 
-// ノートの公開範囲の設定
+// ノートの公開範囲の設定 (public,home,followers,specified)
 const Visibility = ["public", "home"];
 
 // Discordに送信されるメッセージ
