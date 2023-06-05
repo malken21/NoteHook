@@ -11,18 +11,20 @@ function doPost(e) {
             // config で 指定した 公開設定に当てはまるかどうか
             Visibility.includes(data.body.note.visibility) &&
             // config で 指定した フィルターに当てはまるかどうか
-            (Filter == "" || (data.body.note.text && data.body.note.text.match(Filter)))
+            data.body.note.text.match(Filter)
         ) {
 
             // トリガー作成
             createTrigger(data.body.note);
             //レスポンス
             return result(true);
+
+        } else {
+
+            //レスポンス
+            return result(false);
+
         }
-
-        //レスポンス
-        return result(false);
-
     } catch (err) {
         //エラーの場合の処理
 

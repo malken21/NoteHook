@@ -11,5 +11,4 @@ const Visibility = ["public", "home"];
 const Message = "ノートが作成されました https://%Instance%/notes/%note_id%";
 
 // ここに書いた正規表現がノートした文字に当てはまる場合 Discordに送信される
-// "" と入力すると この設定を無視する
-const Filter = "";
+const Filter = /".*"/
