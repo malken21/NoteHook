@@ -7,12 +7,7 @@ function doPost(e) {
         //JSONをコンソール出力
         console.log(data);
 
-        if (
-            // config で 指定した 公開設定に当てはまるかどうか
-            Visibility.includes(data.body.note.visibility) &&
-            // config で 指定した フィルターに当てはまるかどうか
-            data.body.note.text.match(Filter)
-        ) {
+        if (Visibility.includes(data.body.note.visibility)) {
 
             // トリガー作成
             createTrigger(data.body.note);
