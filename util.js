@@ -24,10 +24,25 @@ function createTrigger(note) {
     // 1分後に run が実行するように設定
     const trigger = ScriptApp.newTrigger("run").timeBased().after(60000).create();
 
-    // プロジェクトプロパティ生成
-    PropertiesService.getScriptProperties().setProperty(
+    //プロジェクトプロパティに追加
+    addProperty(
         trigger.getUniqueId(),
-        // Discordに送信する文字
         Message.replace("%note_id%", note.id).replace("%Instance%", Instance)
     );
+}
+
+// プロジェクトプロパティ追加
+function addProperty(triggerId, message) {
+    const properties = PropertiesService.getScriptProperties();
+
+    let idList = properties.getProperty("TriggerData");
+    if (idList) idList = JSON.parse(idList); else idList = [];
+    let textList = properties.getProperty("MessageData");
+    if (textList) textList = JSON.parse(textList); else textList = [];
+
+    idList.push(triggerId);
+    textList.push(message);
+
+    properties.setProperty("TriggerData", JSON.stringify(idList));
+    properties.setProperty("MessageData", JSON.stringify(textList));
 }
