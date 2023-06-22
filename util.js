@@ -22,7 +22,7 @@ function sendDiscord(text) {
 // トリガー作成
 function createTrigger(note) {
     // 1分後に run が実行するように設定
-    const trigger = ScriptApp.newTrigger("run").timeBased().after(60000).create();
+    const trigger = ScriptApp.newTrigger("run").timeBased().after(120000).create();
 
     //プロジェクトプロパティに追加
     addProperty(
